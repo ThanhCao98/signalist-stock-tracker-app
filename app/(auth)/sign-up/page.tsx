@@ -1,8 +1,14 @@
 "use client";
+import { CountrySelectField } from "@/components/forms/CountrySelectField";
+import FooterLink from "@/components/forms/FooterLink";
 import InputField from "@/components/forms/InputField";
 import SelectField from "@/components/forms/SelectField";
 import { Button } from "@/components/ui/button";
-import { INVESTMENT_GOALS, PREFERRED_INDUSTRIES, RISK_TOLERANCE_OPTIONS } from "@/lib/constants";
+import {
+  INVESTMENT_GOALS,
+  PREFERRED_INDUSTRIES,
+  RISK_TOLERANCE_OPTIONS,
+} from "@/lib/constants";
 import { useForm } from "react-hook-form";
 
 const SignUp = () => {
@@ -47,8 +53,12 @@ const SignUp = () => {
           label="Email"
           placeholder="Enter your email"
           register={register}
-          error={errors.email}          
-          validation={{ required: "Email is required", pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: "Email address is required" }}
+          error={errors.email}
+          validation={{
+            required: "Email is required",
+            pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Email address is required",
+          }}
         />
         <InputField
           name="password"
@@ -61,6 +71,13 @@ const SignUp = () => {
         />
 
         {/** Country */}
+        <CountrySelectField
+          name="country"
+          label="Country"
+          control={control}
+          error={errors.country}
+          required
+        />
 
         <SelectField
           name="investmentGoals"
@@ -97,6 +114,8 @@ const SignUp = () => {
         >
           {isSubmitting ? "Creating Account" : "Start Your Investing Journey"}
         </Button>
+
+        <FooterLink text="Already have a account?" linkText="Sign in" href="/sign-in" />
       </form>
     </>
   );
